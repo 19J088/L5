@@ -1,0 +1,29 @@
+<% if flash[:notice] %>
+    <%= flash[:notice] %>
+<% end %>
+<% if session[:login_uid] %> 
+    <% @tweet.each do |t|%>
+        <p><%= t.message %>
+           <%= link_to 'いいね',  likes_path(tweet_id: t.id), method: :post %>
+           <%= link_to 'いいね削除',  "/likes/#{t.id}", method: :delete %>
+            <% if t.likes.count != 0 %>
+               <%= link_to '♥️',  "/likes/#{t.id}", method: :delete %>
+            <% else %>
+               <%= link_to '♡',  likes_path(tweet_id: t.id), method: :post %>
+            <% end %>
+           <%= link_to '削除', "/tweets/#{t.id}" , method: :delete %>
+        </p>
+    <% end %>
+    
+    <p><%= link_to 'ツイートする', '/tweets/new_tweet' %></p>
+    <p><%= link_to 'ログアウト', tops_logout_path %></p>
+<% else %>
+    <% @tweet.each do |t|%>
+        <p><%= t.message %>
+           <%= link_to '削除', "/tweets/#{t.id}" , method: :delete %>
+        </p>
+    <% end %>
+
+    <p><%= link_to 'ログイン', '/tops/login',method: :post %></p>
+    <p><%= link_to 'ユーザ登録', '/users/new' %></p>
+<% end %>

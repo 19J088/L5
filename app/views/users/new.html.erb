@@ -1,0 +1,14 @@
+<% if @user.errors.present? %>
+    <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+    <% end %>
+<% end %>
+
+<%= form_tag @user, method: :post do %>
+    <%= label_tag :uid, 'ユーザーID' %>
+    <%= text_field_tag :uid %>
+    <%= label_tag :pass, 'パスワード' %>
+    <%= password_field_tag :pass %>
+    <%= submit_tag '登録' %>
+<% end %>
+

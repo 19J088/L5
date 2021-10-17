@@ -1,0 +1,5 @@
+<%= form_tag tweets_new_tweet_path, method: :post do %>
+    <%= label_tag :message, '内容' %>
+    <%= text_field_tag :message %>
+    <%= submit_tag 'つぶやく' %>
+<% end %>
